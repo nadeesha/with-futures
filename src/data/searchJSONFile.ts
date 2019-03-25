@@ -46,7 +46,7 @@ export const searchJSONFile = (
 
   pipeline.on("data", result => results.add(result));
 
-  return future.node(done => {
+  return future.node<Error, unknown[]>(done => {
     pipeline.on("end", () => done(null, results.get()));
     pipeline.on("error", error => done(error));
   });
