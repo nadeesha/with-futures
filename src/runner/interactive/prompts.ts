@@ -1,21 +1,21 @@
 import * as fs from "fs";
 import * as prompts from "prompts";
-import { future } from "../../utils/future";
-import { dataStream } from "../../utils/dataStream";
 import { getSearchableFields } from "../../search/getSearchableFields";
+import { dataStream } from "../../utils/dataStream";
+import { future } from "../../utils/future";
 
 const promptsF = future.encaseP<
   Error,
   prompts.Answers<string>,
-  prompts.PromptObject<string> | prompts.PromptObject<string>[]
+  prompts.PromptObject<string> | Array<prompts.PromptObject<string>>
 >(prompts);
 
 export const fileSelectionPrompt = (filesList: string[]) =>
   promptsF({
-    type: "select",
-    name: "value",
+    choices: filesList.map(file => ({ title: file, value: file })),
     message: "Which of the following files do you want to search in?",
-    choices: filesList.map(file => ({ title: file, value: file }))
+    name: "value",
+    type: "select"
   });
 
 export const fieldSelectionPrompt = (file: string) =>
@@ -24,16 +24,16 @@ export const fieldSelectionPrompt = (file: string) =>
     .chain(stream => getSearchableFields(stream))
     .chain(fields =>
       promptsF({
-        type: "select",
-        name: "value",
+        choices: fields.map(field => ({ title: field, value: field })),
         message: "Which field do you want to search in?",
-        choices: fields.map(field => ({ title: field, value: field }))
+        name: "value",
+        type: "select"
       })
     );
 
 export const termInputPrompt = () =>
   promptsF({
-    type: "text",
+    message: "What's your search term?",
     name: "value",
-    message: "What's your search term?"
+    type: "text"
   });

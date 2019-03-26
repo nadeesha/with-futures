@@ -1,12 +1,12 @@
 import { config } from "./../config";
 
 const initialState = {
-  filesList: [],
-  file: "",
+  config,
   field: "",
-  term: "",
+  file: "",
+  filesList: [],
   results: [],
-  config
+  term: ""
 };
 
 export type State = typeof initialState;

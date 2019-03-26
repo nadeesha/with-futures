@@ -1,5 +1,5 @@
-import { interactive } from "./interactive/run";
 import * as program from "commander";
+import { interactive } from "./interactive/run";
 import { streaming } from "./streaming/run";
 
 program

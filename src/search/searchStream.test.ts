@@ -1,7 +1,7 @@
-import * as searchStreamModule from "./searchStream";
-import { searchNode, searchStream } from "./searchStream";
 import { createMockStream } from "../test/utils/streams";
 import { fp } from "../utils/fp";
+import * as searchStreamModule from "./searchStream";
+import { searchNode, searchStream } from "./searchStream";
 
 describe("searchNode", () => {
   it("should be able to search with regex", () => {
@@ -13,29 +13,29 @@ describe("searchNode", () => {
     const tests = [
       {
         data: {
-          bar: "none"
+          bar: "none",
         },
-        match: false
+        match: false,
       },
       {
         data: {
-          foo: "matchx"
+          foo: "matchx",
         },
-        match: false
+        match: false,
       },
       {
         data: {
-          foo: "match1"
+          foo: "match1",
         },
-        match: true
+        match: true,
       },
       {
         data: {
-          foo: ["nomatch", "match2"]
+          foo: ["nomatch", "match2"],
         },
-        match: true
-      }
-    ].forEach(test => {
+        match: true,
+      },
+    ].forEach((test) => {
       const data = { value: test.data };
       expect(search(data)).toBe(test.match ? data : null);
     });
@@ -51,21 +51,21 @@ describe("searchStream", () => {
 
     const mockData = [
       {
-        foo: 1
+        foo: 1,
       },
       {
-        foo: 2
+        foo: 2,
       },
       {
-        foo: 3
-      }
+        foo: 3,
+      },
     ];
 
     const mockSearchNodeFn = jest.fn().mockImplementation(() => fp.identity);
 
     searchStream(mockStream, mockNode, mockTerm, mockSearchNodeFn)
       .promise()
-      .then(result => {
+      .then((result) => {
         expect(mockSearchNodeFn).toHaveBeenCalledTimes(1);
         expect(result.length).toBe(mockData.length);
       });
@@ -86,7 +86,7 @@ describe("searchStream", () => {
 
     searchStream(mockStream, mockNode, mockTerm, mockSearchNodeFn)
       .promise()
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).toBe(mockError);
       });
 

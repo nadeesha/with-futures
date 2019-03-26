@@ -1,17 +1,17 @@
 import { dataStream } from "./dataStream";
 
 jest.mock("fs", () => ({
-  createReadStream: path => path
+  createReadStream: (path) => path,
 }));
 
 jest.mock("path", () => ({
-  join: (...args) => args
+  join: (...args) => args,
 }));
 
 jest.mock("../config", () => ({
   config: {
-    dataDir: "/fake"
-  }
+    dataDir: "/fake",
+  },
 }));
 
 it("should create a steeam with given file name", () => {

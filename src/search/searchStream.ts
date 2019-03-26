@@ -4,11 +4,11 @@ import { streamArray } from "stream-json/streamers/StreamArray";
 import { fp } from "../utils/fp";
 import { future } from "../utils/future";
 
-const { chain } = require("stream-chain");
-const { parser } = require("stream-json");
+import { chain } from "stream-chain";
+import { parser } from "stream-json";
 
 const searchSession = () => {
-  let matches = [];
+  const matches = [];
 
   return {
     add: (value: unknown) => matches.push(value),

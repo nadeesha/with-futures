@@ -1,13 +1,13 @@
 import { createMockStream } from "./../test/utils/streams";
-import { getSearchableFields } from "./getSearchableFields";
 import { fp } from "./../utils/fp";
+import { getSearchableFields } from "./getSearchableFields";
 
 it("should get the top level fields of the json being streamed", () => {
   const mockStream = createMockStream();
 
   const mockData = {
-    foo: "bar",
-    bar: "baz"
+    bar: "baz",
+    foo: "bar"
   };
 
   getSearchableFields(mockStream)

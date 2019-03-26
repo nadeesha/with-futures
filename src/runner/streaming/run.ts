@@ -1,8 +1,8 @@
 import { searchStream } from "../../search/searchStream";
-import { future } from "../../utils/future";
 import { state } from "../../state/application";
-import { logFailure, logResults } from "../common/logs";
 import { State } from "../../state/application";
+import { future } from "../../utils/future";
+import { logFailure, logResults } from "../common/logs";
 
 export const streaming = (field: string, term: string) => {
   future
@@ -12,5 +12,5 @@ export const streaming = (field: string, term: string) => {
         state(currentState, { results })
       )
     )
-    .fork(error => logFailure(error), state => logResults(state));
+    .fork(error => logFailure(error), currentState => logResults(currentState));
 };

@@ -11,5 +11,5 @@ export const interactive = () => {
     .chain(steps.getSearchField)
     .chain(steps.getSearchTerm)
     .chain(steps.search)
-    .fork(error => logFailure(error), state => logResults(state));
+    .fork(error => logFailure(error), currentState => logResults(currentState));
 };

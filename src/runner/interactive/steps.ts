@@ -47,9 +47,9 @@ const search: ChainableStep = currentState => {
 };
 
 export const steps = {
-  getSearchableFiles,
-  getSelectedFile,
   getSearchField,
   getSearchTerm,
+  getSearchableFiles,
+  getSelectedFile,
   search
 };

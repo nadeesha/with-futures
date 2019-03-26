@@ -1,16 +1,14 @@
 import { Readable } from "stream";
+import { chain } from "stream-chain";
+import { parser } from "stream-json";
 import { pick } from "stream-json/filters/Pick";
 import { streamValues } from "stream-json/streamers/StreamValues";
 
 import { fp } from "../utils/fp";
 import { future } from "../utils/future";
-import { ignore } from "stream-json/filters/Ignore";
-
-const { chain } = require("stream-chain");
-const { parser } = require("stream-json");
 
 export const getSearchableFields = (readStream: Readable) => {
-  let keys = [];
+  const keys = [];
 
   const pipeline = chain([
     readStream,

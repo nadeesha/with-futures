@@ -1,5 +1,5 @@
-import { print } from "./print";
 import { fp } from "./fp";
+import { print } from "./print";
 
 it("should print on all configurations", () => {
   const consoleLogSpy = jest
