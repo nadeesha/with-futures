@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { Readable } from "stream";
 import { streamArray } from "stream-json/streamers/StreamArray";
 
 import { fp } from "../utils/fp";
@@ -16,10 +16,28 @@ const searchSession = () => {
   };
 };
 
+export const searchNode = (node: string, regex: RegExp) => data => {
+  if (!data.value) {
+    // ignore malformed value
+    return null;
+  }
+
+  const toString = fp.isString(data.value[node]) ? fp.identity : JSON.stringify;
+
+  const searchValue = toString(data.value[node]) || "";
+
+  if (searchValue.match(regex)) {
+    return data;
+  }
+
+  return null;
+};
+
 export const searchStream = (
-  readStream: fs.ReadStream | NodeJS.ReadStream,
+  readStream: Readable,
   node: string,
-  term: string
+  term: string,
+  searchNodeFn = searchNode
 ) => {
   const regex = new RegExp(term);
 
@@ -29,19 +47,7 @@ export const searchStream = (
     readStream,
     parser(),
     streamArray(),
-    data => {
-      const lofiToString = fp.isString(data.value[node])
-        ? fp.identity
-        : JSON.stringify;
-
-      const searchValue = lofiToString(data.value[node]) || "";
-
-      if (searchValue.match(regex)) {
-        return data;
-      }
-
-      return null;
-    }
+    searchNodeFn(node, regex)
   ]);
 
   pipeline.on("data", result => results.add(result));

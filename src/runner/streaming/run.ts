@@ -1,6 +1,6 @@
 import { searchStream } from "../../search/searchStream";
 import { future } from "../../utils/future";
-import { state } from "../../store/application";
+import { state } from "../../state/application";
 import { logFailure, logResults } from "../common/logs";
 import { State } from "../../state/application";
 

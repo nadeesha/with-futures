@@ -1,0 +1,97 @@
+import * as searchStreamModule from "./searchStream";
+import { searchNode, searchStream } from "./searchStream";
+import { createMockStream } from "../test/utils/streams";
+import { fp } from "../utils/fp";
+
+describe("searchNode", () => {
+  it("should be able to search with regex", () => {
+    const node = "foo";
+    const regex = new RegExp("match[0-9]");
+
+    const search = searchNode(node, regex);
+
+    const tests = [
+      {
+        data: {
+          bar: "none"
+        },
+        match: false
+      },
+      {
+        data: {
+          foo: "matchx"
+        },
+        match: false
+      },
+      {
+        data: {
+          foo: "match1"
+        },
+        match: true
+      },
+      {
+        data: {
+          foo: ["nomatch", "match2"]
+        },
+        match: true
+      }
+    ].forEach(test => {
+      const data = { value: test.data };
+      expect(search(data)).toBe(test.match ? data : null);
+    });
+  });
+});
+
+describe("searchStream", () => {
+  it("should be able handle a stream and call search fn", () => {
+    const mockStream = createMockStream();
+
+    const mockNode = "foo";
+    const mockTerm = "bar";
+
+    const mockData = [
+      {
+        foo: 1
+      },
+      {
+        foo: 2
+      },
+      {
+        foo: 3
+      }
+    ];
+
+    const mockSearchNodeFn = jest.fn().mockImplementation(() => fp.identity);
+
+    searchStream(mockStream, mockNode, mockTerm, mockSearchNodeFn)
+      .promise()
+      .then(result => {
+        expect(mockSearchNodeFn).toHaveBeenCalledTimes(1);
+        expect(result.length).toBe(mockData.length);
+      });
+
+    mockStream.emit("data", JSON.stringify(mockData));
+    mockStream.emit("end");
+  });
+
+  it("should be able handle a stream error", () => {
+    const mockStream = createMockStream();
+
+    const mockNode = "foo";
+    const mockTerm = "bar";
+
+    const mockError = "malformedxx";
+
+    const mockSearchNodeFn = jest.fn().mockImplementation(() => fp.identity);
+
+    searchStream(mockStream, mockNode, mockTerm, mockSearchNodeFn)
+      .promise()
+      .catch(error => {
+        expect(error.message).toBe(mockError);
+      });
+
+    mockStream.emit("data", "foobar");
+    mockStream.emit("error", new Error(mockError));
+    mockStream.emit("end");
+  });
+});

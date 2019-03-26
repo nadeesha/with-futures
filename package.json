@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc --watch",
+    "test": "jest",
     "start": "node lib/index.js"
   },
   "dependencies": {
@@ -23,11 +24,14 @@
   "devDependencies": {
     "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
+    "@types/jest": "^24.0.11",
     "@types/lodash": "^4.14.123",
     "@types/oboe": "^2.0.28",
     "@types/prettyjson": "^0.0.28",
     "@types/prompts": "^1.2.0",
     "@types/stream-json": "^1.0.0",
+    "prettier": "^1.16.4",
+    "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
     "typescript": "^3.3.4000"
   }
