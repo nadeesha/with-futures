@@ -7,8 +7,9 @@ const UNEXPECTED_ERROR_TEXT = "Oh no! An unexpected error occured";
 
 export const logResults = (currentState: State) => {
   print.success(`Search completed with ${currentState.results.length} results`);
+
   currentState.results
-    .map((result) => prettyjson.render(result.value))
+    .map(result => prettyjson.render(result.value))
     .forEach(print.result);
 };
 

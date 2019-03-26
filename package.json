@@ -13,16 +13,14 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.19.0",
-    "derivable": "^2.0.0-beta.3",
     "fluture": "^11.0.1",
-    "jest": "^24.5.0",
     "lodash": "^4.17.11",
-    "oboe": "^2.1.4",
     "prettyjson": "^1.2.1",
     "prompts": "^2.0.4",
     "stream-json": "^1.2.1"
   },
   "devDependencies": {
+    "jest": "^24.5.0",
     "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
     "@types/jest": "^24.0.11",
