@@ -1,1 +1,1 @@
-import "./cli/cli";
+import "./runner/run";

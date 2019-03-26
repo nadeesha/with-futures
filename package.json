@@ -1,20 +1,31 @@
 {
   "name": "zendesk-search",
   "version": "0.0.1",
-  "main": "src/index.ts",
+  "main": "lib/index.js",
   "author": "Nadeesha Cabral <n@nadeesha.me>",
   "license": "MIT",
+  "scripts": {
+    "watch": "tsc --watch",
+    "start": "node lib/index.js"
+  },
   "dependencies": {
+    "chalk": "^2.4.2",
+    "commander": "^2.19.0",
+    "derivable": "^2.0.0-beta.3",
     "fluture": "^11.0.1",
     "jest": "^24.5.0",
     "lodash": "^4.17.11",
     "oboe": "^2.1.4",
+    "prettyjson": "^1.2.1",
     "prompts": "^2.0.4",
     "stream-json": "^1.2.1"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/commander": "^2.12.2",
     "@types/lodash": "^4.14.123",
     "@types/oboe": "^2.0.28",
+    "@types/prettyjson": "^0.0.28",
     "@types/prompts": "^1.2.0",
     "@types/stream-json": "^1.0.0",
     "ts-node": "^8.0.3",

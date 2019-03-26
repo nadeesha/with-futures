@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
+    "outDir": "lib"
   },
   "exclude": ["node_modules"]
 }

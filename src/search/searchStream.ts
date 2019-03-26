@@ -16,8 +16,8 @@ const searchSession = () => {
   };
 };
 
-export const searchJSONFile = (
-  readStream: fs.ReadStream,
+export const searchStream = (
+  readStream: fs.ReadStream | NodeJS.ReadStream,
   node: string,
   term: string
 ) => {

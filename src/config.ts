@@ -1,3 +1,5 @@
 import * as path from "path";
 
-export const DATA_DIR = path.join(__dirname, "..", "data");
+export const config = {
+  dataDir: path.join(__dirname, "..", "data")
+};

@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import * as prompts from "prompts";
-import { future } from "../utils/future";
-import { createDataStream } from "../data/createDataStream";
-import { getSearchableFields } from "../data/getSearchableFields";
+import { future } from "../../utils/future";
+import { dataStream } from "../../utils/dataStream";
+import { getSearchableFields } from "../../search/getSearchableFields";
 
 const promptsF = future.encaseP<
   Error,
@@ -20,7 +20,7 @@ export const fileSelectionPrompt = (filesList: string[]) =>
 
 export const fieldSelectionPrompt = (file: string) =>
   future
-    .of<Error, fs.ReadStream>(createDataStream(file))
+    .of<Error, fs.ReadStream>(dataStream(file))
     .chain(stream => getSearchableFields(stream))
     .chain(fields =>
       promptsF({

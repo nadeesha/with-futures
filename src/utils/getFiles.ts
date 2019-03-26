@@ -1,7 +1,7 @@
 import * as fs from "fs";
-import { future } from "../utils/future";
+import { future } from "./future";
 import * as path from "path";
-import { fp } from "../utils/fp";
+import { fp } from "./fp";
 
 export const onlyJSONFiles = fp.pipe(
   fp.map(fp.toLower),
