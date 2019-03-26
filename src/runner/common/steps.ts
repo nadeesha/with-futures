@@ -1,4 +1,5 @@
 import { FutureInstance } from "fluture";
+import * as invariant from "invariant";
 
 import { searchStream } from "../../search/searchStream";
 import { State, state } from "../../state/application";
@@ -9,19 +10,21 @@ import {
   fieldSelectionPrompt,
   fileSelectionPrompt,
   termInputPrompt
-} from "./prompts";
+} from "../interactive/prompts";
 
 type ChainableStep = (s: State) => FutureInstance<Error, State>;
 
-const getSearchableFiles: ChainableStep = currentState => {
-  return getFiles(currentState.config.dataDir).map(filesList =>
+const getSearchableFiles: ChainableStep = currentState =>
+  getFiles(currentState.config.dataDir).map(filesList =>
     state(currentState, { filesList })
   );
-};
 
 const getSelectedFile: ChainableStep = currentState =>
   fileSelectionPrompt(currentState.filesList).map(answer =>
-    state(currentState, { file: answer.value })
+    state(currentState, {
+      file: answer.value,
+      stream: dataStream(answer.value)
+    })
   );
 
 const getSearchField: ChainableStep = currentState =>
@@ -39,8 +42,12 @@ const search: ChainableStep = currentState => {
     }`
   );
 
+  invariant(currentState.stream, "Stream must be set");
+  invariant(currentState.field, "Search field must be set");
+  invariant(currentState.term, "Search term must be set");
+
   return searchStream(
-    dataStream(currentState.file),
+    currentState.stream,
     currentState.field,
     currentState.term
   ).map(results => state(currentState, { results }));

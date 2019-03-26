@@ -1,7 +1,7 @@
 import { State, state } from "../../state/application";
 import { future } from "../../utils/future";
 import { logFailure, logResults } from "../common/logs";
-import { steps } from "./steps";
+import { steps } from "../common/steps";
 
 export const interactive = () => {
   future

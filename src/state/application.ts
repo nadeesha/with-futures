@@ -1,3 +1,5 @@
+import { Readable } from "stream";
+
 import { config } from "./../config";
 
 const initialState = {
@@ -6,6 +8,7 @@ const initialState = {
   file: "",
   filesList: [],
   results: [],
+  stream: null as Readable | null,
   term: ""
 };
 
