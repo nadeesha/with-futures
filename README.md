@@ -3,23 +3,8 @@
 ## Setup
 
 1. Clone the repository
-1. Install the dependencies with yarn
-
-```sh
-yarn
-```
-
-1. Build the source with Typescript compiler
-
-```sh
-yarn build
-```
-
-1. Execute
-
-```sh
-yarn start -i
-```
+1. Install the dependencies with `yarn`
+1. Build the source with Typescript compiler: `yarn build`
 
 ## Usage
 
