@@ -1,19 +1,21 @@
 import * as searchStreamModule from "../../search/searchStream";
-import { createMockStream } from "../../test/utils/streams";
+import { createMockReadableStream } from "../../test/utils/streams";
 import { future } from "../../utils/future";
 import * as prompts from "../interactive/prompts";
-import { state } from "./../../state/application";
+import { applicationState } from "./../../state/application";
+import { createMockWritableStream } from "./../../test/utils/streams";
 import * as getFilesModule from "./../../utils/getFiles";
 import { steps } from "./steps";
 
-const fakeState = state(undefined, {
+const fakeState = applicationState(undefined, {
   config: {
     dataDir: "foo"
   },
   field: "fakeField",
   file: "fakeFile",
   filesList: ["foo", "bar"],
-  stream: createMockStream(),
+  inStream: createMockReadableStream(),
+  outStream: createMockWritableStream(),
   term: "fakeTerm"
 });
 
@@ -43,7 +45,12 @@ const stepTests = [
   {
     fn: steps.search,
     shouldCall: jest.spyOn(searchStreamModule, "searchStream"),
-    with: [fakeState.stream, fakeState.field, fakeState.term]
+    with: [
+      fakeState.inStream,
+      fakeState.field,
+      fakeState.term,
+      fakeState.outStream
+    ]
   }
 ];
 

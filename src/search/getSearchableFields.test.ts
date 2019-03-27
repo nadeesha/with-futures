@@ -1,9 +1,9 @@
-import { createMockStream } from "./../test/utils/streams";
+import { createMockReadableStream } from "./../test/utils/streams";
 import { fp } from "./../utils/fp";
 import { getSearchableFields } from "./getSearchableFields";
 
 it("should get the top level fields of the json being streamed", () => {
-  const mockStream = createMockStream();
+  const mockStream = createMockReadableStream();
 
   const mockData = {
     bar: "baz",
@@ -16,7 +16,7 @@ it("should get the top level fields of the json being streamed", () => {
 });
 
 it("should error out for malformed streams", () => {
-  const mockStream = createMockStream();
+  const mockStream = createMockReadableStream();
 
   getSearchableFields(mockStream)
     .promise()
@@ -27,7 +27,7 @@ it("should error out for malformed streams", () => {
 });
 
 it("should error out for error events", () => {
-  const mockStream = createMockStream();
+  const mockStream = createMockReadableStream();
 
   const errorMessage = "foo";
 

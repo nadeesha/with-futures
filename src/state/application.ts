@@ -1,4 +1,4 @@
-import { Readable } from "stream";
+import { Readable, Writable } from "stream";
 
 import { config } from "./../config";
 
@@ -7,14 +7,19 @@ const initialState = {
   field: "",
   file: "",
   filesList: [],
-  results: [],
-  stream: null as Readable | null,
+  inStream: null as Readable | null,
+  outStream: null as Writable | null,
+  resultCount: 0,
+  searchTime: 0,
   term: ""
 };
 
 export type State = typeof initialState;
 
-export const state = (prevState = initialState, updated: Partial<State>) => ({
+export const applicationState = (
+  prevState = initialState,
+  updated: Partial<State>
+) => ({
   ...prevState,
   ...updated
 });

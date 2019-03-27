@@ -1,4 +1,4 @@
-import { Readable } from "stream";
+import { Readable, Writable } from "stream";
 import { streamArray } from "stream-json/streamers/StreamArray";
 
 import { fp } from "../utils/fp";
@@ -6,15 +6,7 @@ import { future } from "../utils/future";
 
 import { chain } from "stream-chain";
 import { parser } from "stream-json";
-
-const searchSession = () => {
-  const matches = [];
-
-  return {
-    add: (value: unknown) => matches.push(value),
-    get: () => matches
-  };
-};
+import { prettifyResult } from "../runner/common/logs";
 
 export const searchNode = (node: string, regex: RegExp) => data => {
   if (!data.value) {
@@ -37,11 +29,12 @@ export const searchStream = (
   readStream: Readable,
   node: string,
   term: string,
+  writeStream: Writable,
   searchNodeFn = searchNode
 ) => {
   const regex = new RegExp(term);
 
-  const results = searchSession();
+  let count = 0;
 
   const pipeline = chain([
     readStream,
@@ -50,10 +43,20 @@ export const searchStream = (
     searchNodeFn(node, regex)
   ]);
 
-  pipeline.on("data", result => results.add(result));
+  const startTime = Date.now();
 
-  return future.node<Error, unknown[]>(done => {
-    pipeline.on("end", () => done(null, results.get()));
+  pipeline.on("data", result => {
+    count++;
+    writeStream.write(prettifyResult(result));
+    writeStream.write("\n");
+  });
+
+  return future.node<Error, { count: number; time: number }>(done => {
+    pipeline.on("end", () => {
+      const endTime = Date.now();
+      done(null, { count, time: endTime - startTime });
+    });
+
     pipeline.on("error", error => done(error));
   });
 };

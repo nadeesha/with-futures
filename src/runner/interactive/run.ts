@@ -1,11 +1,15 @@
-import { State, state } from "../../state/application";
+import { State, applicationState } from "../../state/application";
 import { future } from "../../utils/future";
 import { logFailure, logResults } from "../common/logs";
 import { steps } from "../common/steps";
 
 export const interactive = () => {
   future
-    .of<Error, State>(state(undefined, {}))
+    .of<Error, State>(
+      applicationState(undefined, {
+        outStream: process.stdout
+      })
+    )
     .chain(steps.getSearchableFiles)
     .chain(steps.getSelectedFile)
     .chain(steps.getSearchField)

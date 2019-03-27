@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc --watch",
+    "build": "tsc",
     "test": "jest",
     "start": "node lib/index.js",
     "lint": "tslint --project ."
