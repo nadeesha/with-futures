@@ -1,5 +1,8 @@
 # search-json-stream
 
+- Written with Typescript and Node.js
+- [DEMO](https://asciinema.org/a/53d2So02TimLw4lxhFErnRnas)
+
 ## Setup
 
 1. Clone the repository
@@ -43,9 +46,9 @@ Example:
 ✔ What's your search term? … (pending|hold) # <----------
 > Searching tickets.json for status: (pending|hold)
 ---
-_id:             436bf9b0
+_id:             436bf9b0...
 ...
-✔ Search completed with 82 results
+✔ Search completed with 42 results
 ```
 
 ## Tests
