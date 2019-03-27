@@ -1,4 +1,4 @@
-# Zendesk Search
+# search-json-stream
 
 ## Setup
 
