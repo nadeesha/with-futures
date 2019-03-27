@@ -61,6 +61,7 @@ yarn test
 1. Using file streaming, I've tried to account for reading large JSON files that may exceed the device memory and returning results that exceed the device memory as well.
 1. I've made extensive use of [Futures](https://github.com/fluture-js/Fluture) to conduct async tasks and control the execution flow.
 1. State is managed via a single reducer.
+1. Typescript is used as a type system and for general goodnes™.
 
 ## Limitations
 
