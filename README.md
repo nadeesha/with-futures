@@ -70,3 +70,4 @@ yarn test
 
 1. Result parsing (pretty print and searching within the js object) is currently blocking. A collection of large JSON objects (~ several hundered complex fields per object) will slow down the search.
 1. Data directory (`data`) is not configurable. This is a low-hanging point of improvement.
+1. Currently, searchable fields are only the top level fields. This can be extended to include sub fields.
