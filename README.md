@@ -68,5 +68,5 @@ yarn test
 
 ## Limitations
 
-1. Result parsing (pretty print and searching within the js object) is currently blocking. A large JSON object may slow down the search.
+1. Result parsing (pretty print and searching within the js object) is currently blocking. A collection of large JSON objects (~ several hundered complex fields per object) will slow down the search.
 1. Data directory (`data`) is not configurable. This is a low-hanging point of improvement.
