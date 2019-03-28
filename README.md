@@ -1,7 +1,8 @@
 # search-json-stream
 
-- Written with Typescript and Node.js
+- Written with Typescript and runs on Node.js
 - [DEMO](https://asciinema.org/a/53d2So02TimLw4lxhFErnRnas)
+- Tested on node v8.11.1
 
 ## Setup
 
