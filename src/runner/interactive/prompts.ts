@@ -33,7 +33,7 @@ export const fieldSelectionPrompt = (file: string) =>
 
 export const termInputPrompt = () =>
   promptsF({
-    message: "What's your search term?",
+    message: "What's your regex search term?",
     name: "value",
     type: "text"
   });
