@@ -1,4 +1,6 @@
-# search-json-stream
+# with-futures
+
+This is an accompanying exercise to [From Promises to Futures in Javascript](https://medium.com/@nadeesha/from-promises-to-futures-in-javascript-bb46f3ed5d89). As a CLI application running on Node.js, this will attempt to parse large amounts of data by constructing a stateless pipeline - with Futures.
 
 - Written with Typescript and runs on Node.js
 - [DEMO](https://asciinema.org/a/53d2So02TimLw4lxhFErnRnas)
