@@ -42,7 +42,7 @@ Regex is accepted as a search term in both streaming and interactive mode
 
 Example:
 
-```sh
+```
 → yarn start -i
 ✔ Which of the following files do you want to search in? › tickets.json
 ✔ Which field do you want to search in? › status
