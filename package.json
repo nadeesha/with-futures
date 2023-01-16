@@ -16,7 +16,7 @@
     "commander": "^2.19.0",
     "fluture": "^11.0.1",
     "invariant": "^2.2.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "prettyjson": "^1.2.1",
     "prompts": "^2.0.4",
     "stream-json": "^1.2.1"
